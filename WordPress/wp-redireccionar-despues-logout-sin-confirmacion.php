@@ -12,7 +12,8 @@ function logout_without_confirm($action, $result)
 {
     if ($action == "log-out" && !isset($_GET['_wpnonce'])) {
         $redirect_to = '/';
-		wp_redirect($redirect_to);
-		exit;
+        $location = str_replace('&amp;', '&', wp_logout_url($redirect_to));
+        header("Location: $location");
+        die;
     }
 }
